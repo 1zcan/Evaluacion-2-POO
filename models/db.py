@@ -1,20 +1,19 @@
 import mysql.connector
 from mysql.connector import Error
 
+
 def conectar():
     try:
         print("Intentando conectar a la base de datos...")
         conn = mysql.connector.connect(
-            host='localhost',
-            database='bdevaluacion2',
-            user='root',
-            password=''
+            host="localhost", database="bdevaluacion2", user="root", password=""
         )
         print("Conexión exitosa!")
         return conn
     except Error as e:
         print(f"Error al conectar a MariaDB: {e}")
         return None
+
 
 def crear_tablas():
     conn = conectar()
@@ -23,9 +22,9 @@ def crear_tablas():
     try:
         cursor = conn.cursor()
         print("Creando tablas...")
-        
+
         # Tabla de Empleados
-        cursor.execute('''
+        cursor.execute("""
             CREATE TABLE IF NOT EXISTS empleados (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 nombre VARCHAR(25) NOT NULL,
@@ -35,30 +34,30 @@ def crear_tablas():
                 fecha_contrato DATE,
                 salario DECIMAL(10,2)
             )
-        ''')
+        """)
 
         # Tabla de Departamentos
-        cursor.execute('''
+        cursor.execute("""
             CREATE TABLE IF NOT EXISTS departamentos (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 nombre VARCHAR(255) NOT NULL,
                 gerente_id INT,
                 FOREIGN KEY (gerente_id) REFERENCES empleados(id) ON DELETE SET NULL
             )
-        ''')
+        """)
 
         # Tabla de Proyectos
-        cursor.execute('''
+        cursor.execute("""
             CREATE TABLE IF NOT EXISTS proyectos (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 nombre VARCHAR(255) NOT NULL,
                 descripcion TEXT,
                 fecha_inicio DATE
             )
-        ''')
+        """)
 
         # Tabla de Asignación de Empleados a Proyectos
-        cursor.execute('''
+        cursor.execute("""
             CREATE TABLE IF NOT EXISTS empleados_proyecto (
                 empleado_id INT,
                 proyecto_id INT,
@@ -66,7 +65,7 @@ def crear_tablas():
                 FOREIGN KEY (empleado_id) REFERENCES empleados(id) ON DELETE CASCADE,
                 FOREIGN KEY (proyecto_id) REFERENCES proyectos(id) ON DELETE CASCADE
             )
-        ''')
+        """)
 
         conn.commit()
         print("Tablas creadas exitosamente!")
@@ -75,5 +74,6 @@ def crear_tablas():
     finally:
         cursor.close()
         conn.close()
+
 
 crear_tablas()

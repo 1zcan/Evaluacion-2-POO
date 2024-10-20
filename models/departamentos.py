@@ -6,7 +6,9 @@ class Departamento:
         self.gerente = gerente  # Objeto de la clase Empleado
 
     def descripcion(self):
-        return f"El departamento de {self.nombre} está a cargo de {self.gerente.nombre}."
+        return (
+            f"El departamento de {self.nombre} está a cargo de {self.gerente.nombre}."
+        )
 
     def __repr__(self):
         return f"Departamento({self.nombre}, Gerente: {self.gerente.nombre})"

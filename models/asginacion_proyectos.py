@@ -5,4 +5,3 @@ class asignacion_proyecto:
 
     def __repr__(self):
         return f"AsignacionProyecto(Empleado ID: {self.empleado_id}, Proyecto ID: {self.proyecto_id})"
-
