@@ -23,20 +23,20 @@ def crear_tablas():
     try:
         cursor = conn.cursor()
         print("Creando tablas...")
-        
+
         # Tabla de Empleados
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS empleados (
                 id INT AUTO_INCREMENT PRIMARY KEY,
-                nombre VARCHAR(25) NOT NULL,
-                direccion VARCHAR(25),
+                nombre VARCHAR(50) NOT NULL,
+                direccion VARCHAR(50),
                 telefono VARCHAR(20),
-                email VARCHAR(25),
+                email VARCHAR(50),
                 fecha_contrato DATE,
                 salario DECIMAL(10,2)
             )
         ''')
-        
+
         # Tabla de Departamentos
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS departamentos (
@@ -46,7 +46,7 @@ def crear_tablas():
                 FOREIGN KEY (gerente_id) REFERENCES empleados(id) ON DELETE SET NULL
             )
         ''')
-        
+
         # Tabla de Proyectos
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS proyectos (
@@ -56,7 +56,7 @@ def crear_tablas():
                 fecha_inicio DATE
             )
         ''')
-        
+
         # Tabla de Asignación de Empleados a Proyectos
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS empleados_proyecto (
@@ -88,17 +88,6 @@ def crear_tablas():
                 horas INT,
                 descripcion TEXT,
                 proyecto_id INT,
-                FOREIGN KEY (empleado_id) REFERENCES empleados(id) ON DELETE CASCADE,
-                FOREIGN KEY (proyecto_id) REFERENCES proyectos(id) ON DELETE CASCADE
-            )
-        ''')
-
-        # Tabla de Asignaciones a Proyectos
-        cursor.execute('''
-            CREATE TABLE IF NOT EXISTS asignaciones_proyectos (
-                empleado_id INT,
-                proyecto_id INT,
-                PRIMARY KEY (empleado_id, proyecto_id),
                 FOREIGN KEY (empleado_id) REFERENCES empleados(id) ON DELETE CASCADE,
                 FOREIGN KEY (proyecto_id) REFERENCES proyectos(id) ON DELETE CASCADE
             )
