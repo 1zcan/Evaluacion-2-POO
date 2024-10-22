@@ -1,17 +1,18 @@
 import mysql.connector
 from models.db import conectar
-from models.empleados import Empleado
+from models.proyectos import Proyecto
 
-def crear_empleado(nombre, direccion, telefono, email, fecha_contrato, salario):
-    #Función para crear un empleado.
+def crear_proyecto(nombre, descripcion, fecha_inicio):
+    
+    #Función para crear un proyecto.
     conn = conectar()
     if conn is None:
         return
     cursor = conn.cursor()
     try:
         cursor.execute(
-            "INSERT INTO empleados (nombre, direccion, telefono, email, fecha_contrato, salario) VALUES (%s, %s, %s, %s, %s, %s)",
-            (nombre, direccion, telefono, email, fecha_contrato, salario)
+            "INSERT INTO proyectos (nombre, descripcion, fecha_inicio) VALUES (%s, %s, %s)",
+            (nombre, descripcion, fecha_inicio)
         )
         conn.commit()
     except mysql.connector.Error as err:
@@ -21,16 +22,17 @@ def crear_empleado(nombre, direccion, telefono, email, fecha_contrato, salario):
         cursor.close()
         conn.close()
 
-def obtener_empleados():
-    #Función para obtener todos los empleados.
+def obtener_proyectos():
+    
+    #Función para obtener todos los proyectos.
     conn = conectar()
     if conn is None:
         return []
     cursor = conn.cursor()
     try:
-        cursor.execute("SELECT * FROM empleados")
-        empleados = cursor.fetchall()
-        return [Empleado(*empleado) for empleado in empleados]
+        cursor.execute("SELECT * FROM proyectos")
+        proyectos = cursor.fetchall()
+        return [Proyecto(*proyecto) for proyecto in proyectos]
     except mysql.connector.Error as err:
         print(f"Error: {err}")
         return []
@@ -38,17 +40,18 @@ def obtener_empleados():
         cursor.close()
         conn.close()
 
-def buscar_empleado_por_nombre(nombre):
-    #Función para buscar un empleado por nombre.
+def buscar_proyecto_por_id(id):
+    
+    #Función para buscar un proyecto por ID.
     conn = conectar()
     if conn is None:
         return None
     cursor = conn.cursor()
     try:
-        cursor.execute("SELECT * FROM empleados WHERE nombre = %s", (nombre,))
-        empleado = cursor.fetchone()
-        if empleado:
-            return Empleado(*empleado)
+        cursor.execute("SELECT * FROM proyectos WHERE id = %s", (id,))
+        proyecto = cursor.fetchone()
+        if proyecto:
+            return Proyecto(*proyecto)
         return None
     except mysql.connector.Error as err:
         print(f"Error: {err}")
@@ -57,16 +60,17 @@ def buscar_empleado_por_nombre(nombre):
         cursor.close()
         conn.close()
 
-def actualizar_empleado(id, nombre, direccion, telefono, email, fecha_contrato, salario):
-    #Función para actualizar un empleado.
+def actualizar_proyecto(id, nombre, descripcion, fecha_inicio):
+    
+    #Función para actualizar un proyecto.
     conn = conectar()
     if conn is None:
         return
     cursor = conn.cursor()
     try:
         cursor.execute(
-            "UPDATE empleados SET nombre = %s, direccion = %s, telefono = %s, email = %s, fecha_contrato = %s, salario = %s WHERE id = %s",
-            (nombre, direccion, telefono, email, fecha_contrato, salario, id)
+            "UPDATE proyectos SET nombre = %s, descripcion = %s, fecha_inicio = %s WHERE id = %s",
+            (nombre, descripcion, fecha_inicio, id)
         )
         conn.commit()
     except mysql.connector.Error as err:
@@ -76,14 +80,15 @@ def actualizar_empleado(id, nombre, direccion, telefono, email, fecha_contrato, 
         cursor.close()
         conn.close()
 
-def eliminar_empleado(id):
-    #Función para eliminar un empleado.
+def eliminar_proyecto(id):
+    
+    #Función para eliminar un proyecto.
     conn = conectar()
     if conn is None:
         return
     cursor = conn.cursor()
     try:
-        cursor.execute("DELETE FROM empleados WHERE id = %s", (id,))
+        cursor.execute("DELETE FROM proyectos WHERE id = %s", (id,))
         conn.commit()
     except mysql.connector.Error as err:
         print(f"Error: {err}")
