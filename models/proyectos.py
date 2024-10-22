@@ -1,4 +1,4 @@
-class Proyecto:
+class proyectos:
     def __init__(self, id, nombre, descripcion, fecha_inicio):
         self.id = id
         self.nombre = nombre
@@ -6,4 +6,4 @@ class Proyecto:
         self.fecha_inicio = fecha_inicio
 
     def __repr__(self):
-        return f"Proyecto({self.nombre}, {self.descripcion}, {self.fecha_inicio})"
+        return f"Proyecto({self.id}, {self.nombre}, {self.descripcion}, {self.fecha_inicio})"
