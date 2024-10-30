@@ -1,165 +1,118 @@
 from controllers.empleados_controller import (
-    crear_empleado,
+    crear_empleados,
     obtener_empleados,
-    actualizar_empleado,
-    eliminar_empleado,
-    buscar_empleado_por_nombre,
-)
-from controllers.departamento_controller import (
+    actualizar_empleados,
+    eliminar_empleados,
+    buscar_empleados_por_nombre,
+)  # importar funciones del controlador de Empleados
+
+from controllers.departamentos_controller import (
     crear_departamento,
     obtener_departamentos,
     actualizar_departamento,
     eliminar_departamento,
     buscar_departamento_por_nombre,
-)
-from controllers.proyectos_controller import (
-    crear_proyecto,
-    obtener_proyectos,
-    actualizar_proyecto,
-    eliminar_proyecto,
-    buscar_proyecto_por_nombre,
-)
-from controllers.asignacion_proyecto_controller import (
-    asignar_proyecto,
-    obtener_asignaciones,
-    actualizar_asignacion,
-    eliminar_asignacion,
-)
-from controllers.registro_tiempo_controller import (
-    registrar_tiempo,
-    obtener_registros_tiempo,
-    actualizar_registro_tiempo,
-    eliminar_registro_tiempo,
-)
-from models.db import crear_tablas
+)  # Importar funciones del controlador de departamento
 
-def mostrar_menu():
-    crear_tablas()
+from models.db import (
+    crear_tablas,
+)  # Importar función para crear las tablas en la base de datos
 
-    while True:
+
+def mostrar_menu():  # Función para mostrar el menú
+    crear_tablas()  # Crear las tablas si no existen
+
+    while (
+        True
+    ):  # Ciclo infinito para mostrar el menú, hasta que el usuario decida salir
         print("\n--- Menú ---")
-        print("1. Crear Empleado")
-        print("2. Crear Departamento")
-        print("3. Crear Proyecto")
-        print("4. Asignar Proyecto")
-        print("5. Registrar Tiempo")
-        print("6. Mostrar Empleados")
-        print("7. Mostrar Departamentos")
-        print("8. Mostrar Proyectos")
-        print("9. Mostrar Asignaciones")
-        print("10. Mostrar Registros de Tiempo")
-        print("11. Actualizar Empleado")
-        print("12. Actualizar Departamento")
-        print("13. Actualizar Proyecto")
-        print("14. Actualizar Asignación")
-        print("15. Actualizar Registro de Tiempo")
-        print("16. Eliminar Empleado")
-        print("17. Eliminar Departamento")
-        print("18. Eliminar Proyecto")
-        print("19. Eliminar Asignación")
-        print("20. Eliminar Registro de Tiempo")
-        print("21. Salir")
+        print("1. Crear empleados")
+        print("2. Crear departamento")
+        print("3. Mostrar empleados")
+        print("4. Mostrar departamentos")
+        print("5. Actualizar empleados")
+        print("6. Actualizar departamento")
+        print("7. Eliminar empleados")
+        print("8. Eliminar departamento")
+        print("9. Salir")
 
         opcion = input("Elige una opción: ")
 
-        if opcion == "1":
-            nombre = input("Nombre del empleado: ")
-            direccion = input("Dirección del empleado: ")
-            telefono = input("Teléfono del empleado: ")
-            email = input("Email del empleado: ")
-            fecha_contrato = input("Fecha de contrato (YYYY-MM-DD): ")
-            salario = float(input("Salario del empleado: "))
-            crear_empleado(nombre, direccion, telefono, email, fecha_contrato, salario)
-        elif opcion == "2":
+        if (
+            opcion == "1"
+        ):  # Si la opcion es 1, se pide el nombre, la edad y la carrera del empleados y se llama a la funcion crear_empleados
+            nombre = input("Nombre del empleados: ")
+            edad = int(input("Edad del empleados: "))
+            carrera = input("Carrera del empleados: ")
+            crear_empleados(
+                nombre, edad, carrera
+            )  # llamamos a la funcion crear_empleados que se encuentra en el archivo empleados_controller.py
+
+        elif (
+            opcion == "2"
+        ):  # Si la opcion es 2, se pide el nombre, la edad y la materia del departamento y se llama a la funcion crear_departamento
             nombre = input("Nombre del departamento: ")
-            crear_departamento(nombre)
-        elif opcion == "3":
-            nombre = input("Nombre del proyecto: ")
-            descripcion = input("Descripción del proyecto: ")
-            fecha_inicio = input("Fecha de inicio (YYYY-MM-DD): ")
-            fecha_fin = input("Fecha de fin (YYYY-MM-DD): ")
-            crear_proyecto(nombre, descripcion, fecha_inicio, fecha_fin)
+            edad = int(input("Edad del departamento: "))
+            materia = input("Materia del departamento: ")
+            crear_departamento(nombre, edad, materia)  #
+        elif (
+            opcion == "3"
+        ):  # Si la opcion es 3, se llama a la funcion obtener_Empleados que se encuentra en el archivo empleados_controller.py
+            Empleados = obtener_empleados()  # llamamos a la funcion obtener_Empleados que se encuentra en el archivo empleados_controller.py
+            if Empleados:  # Si hay Empleados registrados, se recorre la lista de Empleados y se imprime el nombre, la edad y la carrera de cada uno
+                for empleados in Empleados:  # Recorremos la lista de Empleados,
+                    print(
+                        f"{empleados[0]} - {empleados[1]}, {empleados[2]} años, Carrera: {empleados[3]}"
+                    )  # imprimimos el nombre, la edad y la carrera de cada empleados
+            else:
+                print(
+                    "No hay Empleados registrados."
+                )  # Si no hay Empleados registrados, se imprime un mensaje
         elif opcion == "4":
-            empleado_id = int(input("ID del empleado: "))
-            proyecto_id = int(input("ID del proyecto: "))
-            asignar_proyecto(empleado_id, proyecto_id)
-        elif opcion == "5":
-            empleado_id = int(input("ID del empleado: "))
-            proyecto_id = int(input("ID del proyecto: "))
-            fecha = input("Fecha (YYYY-MM-DD): ")
-            horas = float(input("Horas trabajadas: "))
-            descripcion = input("Descripción del trabajo: ")
-            registrar_tiempo(empleado_id, proyecto_id, fecha, horas, descripcion)
+            departamentos = obtener_departamentos()  # llamamos a la funcion obtener_departamentos que se encuentra en el archivo departamento_controller.py
+            if departamentos:  # Si hay departamentos registrados, se recorre la lista de departamentos y se imprime el nombre, la edad y la materia de cada uno
+                for (
+                    departamento
+                ) in departamentos:  # Recorremos la lista de departamentos,
+                    print(
+                        f"{departamento[0]} - {departamento[1]}, {departamento[2]} años, Materia: {departamento[3]}"
+                    )
+            else:
+                print("No hay departamentos registrados.")
+        elif (
+            opcion == "5"
+        ):  # Si la opcion es 5, se pide el nombre del empleados a actualizar y se llama a la funcion buscar_empleados_por_nombre
+            nombre = input("Nombre del empleados a actualizar: ")
+            empleados = buscar_empleados_por_nombre(nombre)
+            if empleados:  # Si el empleados existe, se pide el nuevo nombre, la nueva edad y la nueva carrera del empleados y se llama a la funcion actualizar_empleados
+                nuevo_nombre = input("Nuevo nombre del empleados: ")
+                edad = int(input("Nueva edad del empleados: "))
+                carrera = input("Nueva carrera del empleados: ")
+                actualizar_empleados(nombre, nuevo_nombre, edad, carrera)
+                print("empleados actualizado exitosamente.")
+            else:
+                print("empleados no encontrado.")
         elif opcion == "6":
-            empleados = obtener_empleados()
-            for empleado in empleados:
-                print(empleado)
+            nombre = input("Nombre del departamento a actualizar: ")
+            departamento = buscar_departamento_por_nombre(nombre)
+            if departamento:
+                nuevo_nombre = input("Nuevo nombre del departamento: ")
+                edad = int(input("Nueva edad del departamento: "))
+                materia = input("Nueva materia del departamento: ")
+                actualizar_departamento(nombre, nuevo_nombre, edad, materia)
+                print("departamento actualizado exitosamente.")
+            else:
+                print("departamento no encontrado.")
         elif opcion == "7":
-            departamentos = obtener_departamentos()
-            for departamento in departamentos:
-                print(departamento)
+            nombre = input("Nombre del empleados a eliminar: ")
+            eliminar_empleados(nombre)
+            print("empleados eliminado exitosamente.")
         elif opcion == "8":
-            proyectos = obtener_proyectos()
-            for proyecto in proyectos:
-                print(proyecto)
+            nombre = input("Nombre del departamento a eliminar: ")
+            eliminar_departamento(nombre)
+            print("departamento eliminado exitosamente.")
         elif opcion == "9":
-            asignaciones = obtener_asignaciones()
-            for asignacion in asignaciones:
-                print(asignacion)
-        elif opcion == "10":
-            registros = obtener_registros_tiempo()
-            for registro in registros:
-                print(registro)
-        elif opcion == "11":
-            id = int(input("ID del empleado a actualizar: "))
-            nombre = input("Nuevo nombre del empleado: ")
-            direccion = input("Nueva dirección del empleado: ")
-            telefono = input("Nuevo teléfono del empleado: ")
-            email = input("Nuevo email del empleado: ")
-            fecha_contrato = input("Nueva fecha de contrato (YYYY-MM-DD): ")
-            salario = float(input("Nuevo salario del empleado: "))
-            actualizar_empleado(id, nombre, direccion, telefono, email, fecha_contrato, salario)
-        elif opcion == "12":
-            id = int(input("ID del departamento a actualizar: "))
-            nombre = input("Nuevo nombre del departamento: ")
-            actualizar_departamento(id, nombre)
-        elif opcion == "13":
-            id = int(input("ID del proyecto a actualizar: "))
-            nombre = input("Nuevo nombre del proyecto: ")
-            descripcion = input("Nueva descripción del proyecto: ")
-            fecha_inicio = input("Nueva fecha de inicio (YYYY-MM-DD): ")
-            fecha_fin = input("Nueva fecha de fin (YYYY-MM-DD): ")
-            actualizar_proyecto(id, nombre, descripcion, fecha_inicio, fecha_fin)
-        elif opcion == "14":
-            id = int(input("ID de la asignación a actualizar: "))
-            empleado_id = int(input("Nuevo ID del empleado: "))
-            proyecto_id = int(input("Nuevo ID del proyecto: "))
-            actualizar_asignacion(id, empleado_id, proyecto_id)
-        elif opcion == "15":
-            id = int(input("ID del registro de tiempo a actualizar: "))
-            empleado_id = int(input("Nuevo ID del empleado: "))
-            proyecto_id = int(input("Nuevo ID del proyecto: "))
-            fecha = input("Nueva fecha (YYYY-MM-DD): ")
-            horas = float(input("Nuevas horas trabajadas: "))
-            descripcion = input("Nueva descripción del trabajo: ")
-            actualizar_registro_tiempo(id, empleado_id, proyecto_id, fecha, horas, descripcion)
-        elif opcion == "16":
-            id = int(input("ID del empleado a eliminar: "))
-            eliminar_empleado(id)
-        elif opcion == "17":
-            id = int(input("ID del departamento a eliminar: "))
-            eliminar_departamento(id)
-        elif opcion == "18":
-            id = int(input("ID del proyecto a eliminar: "))
-            eliminar_proyecto(id)
-        elif opcion == "19":
-            id = int(input("ID de la asignación a eliminar: "))
-            eliminar_asignacion(id)
-        elif opcion == "20":
-            id = int(input("ID del registro de tiempo a eliminar: "))
-            eliminar_registro_tiempo(id)
-        elif opcion == "21":
             print("Saliendo del programa...")
             break
         else:
-            print("Opción no válida, por favor elige una opción del 1 al 21.")
+            print("Opción inválida.")
