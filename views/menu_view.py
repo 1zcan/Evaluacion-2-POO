@@ -40,42 +40,42 @@ def mostrar_menu():  # Función para mostrar el menú
 
         if (
             opcion == "1"
-        ):  # Si la opcion es 1, se pide el nombre, la edad y la carrera del empleados y se llama a la funcion crear_empleados
-            nombre = input("Nombre del empleados: ")
-            edad = int(input("Edad del empleados: "))
-            carrera = input("Carrera del empleados: ")
+        ):  # Si la opcion es 1, se pide el nombre, la edad y el departamento del empleados y se llama a la funcion crear_empleados
+            nombre = input("Nombre del empleado: ")
+            edad = int(input("Edad del empleado: "))
+            departamento = input("departamento del empleado: ")
             crear_empleados(
-                nombre, edad, carrera
+                nombre, edad, departamento
             )  # llamamos a la funcion crear_empleados que se encuentra en el archivo empleados_controller.py
 
         elif (
             opcion == "2"
-        ):  # Si la opcion es 2, se pide el nombre, la edad y la materia del departamento y se llama a la funcion crear_departamento
+        ):  # Si la opcion es 2, se pide el nombre y el gerente del departamento y se llama a la funcion crear_departamento
             nombre = input("Nombre del departamento: ")
-            edad = int(input("Edad del departamento: "))
-            materia = input("Materia del departamento: ")
-            crear_departamento(nombre, edad, materia)  #
+         
+            gerente = input("gerente del departamento: ")
+            crear_departamento(nombre, gerente)  #
         elif (
             opcion == "3"
         ):  # Si la opcion es 3, se llama a la funcion obtener_Empleados que se encuentra en el archivo empleados_controller.py
             Empleados = obtener_empleados()  # llamamos a la funcion obtener_Empleados que se encuentra en el archivo empleados_controller.py
-            if Empleados:  # Si hay Empleados registrados, se recorre la lista de Empleados y se imprime el nombre, la edad y la carrera de cada uno
+            if Empleados:  # Si hay Empleados registrados, se recorre la lista de Empleados y se imprime el nombre, la edad y la departamento de cada uno
                 for empleados in Empleados:  # Recorremos la lista de Empleados,
                     print(
-                        f"{empleados[0]} - {empleados[1]}, {empleados[2]} años, Carrera: {empleados[3]}"
-                    )  # imprimimos el nombre, la edad y la carrera de cada empleados
+                        f"{empleados[0]} - {empleados[1]}, {empleados[2]} años, departamento: {empleados[3]}"
+                    )  
             else:
                 print(
                     "No hay Empleados registrados."
-                )  # Si no hay Empleados registrados, se imprime un mensaje
+                )  
         elif opcion == "4":
             departamentos = obtener_departamentos()  # llamamos a la funcion obtener_departamentos que se encuentra en el archivo departamento_controller.py
-            if departamentos:  # Si hay departamentos registrados, se recorre la lista de departamentos y se imprime el nombre, la edad y la materia de cada uno
+            if departamentos:  # Si hay departamentos registrados, se recorre la lista de departamentos y se imprime el nombre, la edad y la gerente de cada uno
                 for (
                     departamento
                 ) in departamentos:  # Recorremos la lista de departamentos,
                     print(
-                        f"{departamento[0]} - {departamento[1]}, {departamento[2]} años, Materia: {departamento[3]}"
+                        f"{departamento[0]} - {departamento[1]}, {departamento[2]} años, gerente: {departamento[3]}"
                     )
             else:
                 print("No hay departamentos registrados.")
@@ -84,22 +84,21 @@ def mostrar_menu():  # Función para mostrar el menú
         ):  # Si la opcion es 5, se pide el nombre del empleados a actualizar y se llama a la funcion buscar_empleados_por_nombre
             nombre = input("Nombre del empleados a actualizar: ")
             empleados = buscar_empleados_por_nombre(nombre)
-            if empleados:  # Si el empleados existe, se pide el nuevo nombre, la nueva edad y la nueva carrera del empleados y se llama a la funcion actualizar_empleados
+            if empleados:  # Si el empleados existe, se pide el nuevo nombre, la nueva edad y la nueva departamento del empleados y se llama a la funcion actualizar_empleados
                 nuevo_nombre = input("Nuevo nombre del empleados: ")
                 edad = int(input("Nueva edad del empleados: "))
-                carrera = input("Nueva carrera del empleados: ")
-                actualizar_empleados(nombre, nuevo_nombre, edad, carrera)
+                departamento = input("Nuevo departamento de empleados: ")
+                actualizar_empleados(nombre, nuevo_nombre, edad, departamento)
                 print("empleados actualizado exitosamente.")
             else:
-                print("empleados no encontrado.")
+                print("empleado no encontrado.")
         elif opcion == "6":
             nombre = input("Nombre del departamento a actualizar: ")
             departamento = buscar_departamento_por_nombre(nombre)
             if departamento:
                 nuevo_nombre = input("Nuevo nombre del departamento: ")
-                edad = int(input("Nueva edad del departamento: "))
-                materia = input("Nueva materia del departamento: ")
-                actualizar_departamento(nombre, nuevo_nombre, edad, materia)
+                gerente = input("Nuevo gerente del departamento: ")
+                actualizar_departamento(nombre, nuevo_nombre,  gerente)
                 print("departamento actualizado exitosamente.")
             else:
                 print("departamento no encontrado.")
