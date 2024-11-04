@@ -1,7 +1,7 @@
 import mysql.connector
 from models.db import conectar
-from models.empleados import Empleado
-from models.departamentos import Departamento
+from models.empleados import empleados
+from models.departamentos import departamentos
 
 def crear_departamento(nombre, gerente_id):
     # Función para crear un departamento
@@ -31,7 +31,7 @@ def obtener_departamentos():
     try:
         cursor.execute("SELECT d.id, d.nombre, d.gerente_id, e.nombre FROM departamentos d JOIN empleados e ON d.gerente_id = e.id")
         departamentos = cursor.fetchall()
-        return [Departamento(id, nombre, gerente_id, Empleado(gerente_id, gerente_nombre, None, None, None, None, None)) for id, nombre, gerente_id, gerente_nombre in departamentos]
+        return [departamentos(id, nombre, gerente_id, empleados(gerente_id, gerente_nombre, None, None, None, None, None)) for id, nombre, gerente_id, gerente_nombre in departamentos]
     except mysql.connector.Error as err:
         print(f"Error: {err}")
         return []
@@ -50,7 +50,7 @@ def buscar_departamento_por_nombre(nombre):
         departamento = cursor.fetchone()
         if departamento:
             id, nombre, gerente_id, gerente_nombre = departamento
-            return Departamento(id, nombre, gerente_id, Empleado(gerente_id, gerente_nombre, None, None, None, None, None))
+            return departamentos(id, nombre, gerente_id, empleados(gerente_id, gerente_nombre, None, None, None, None, None))
         return None
     except mysql.connector.Error as err:
         print(f"Error: {err}")

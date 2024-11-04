@@ -1,9 +1,9 @@
 from controllers.empleados_controller import (
-    crear_empleados,
+    crear_empleado,
     obtener_empleados,
-    actualizar_empleados,
-    eliminar_empleados,
-    buscar_empleados_por_nombre,
+    actualizar_empleado,
+    eliminar_empleado,
+    buscar_empleado_por_nombre,
 )  # importar funciones del controlador de Empleados
 
 from controllers.departamentos_controller import (
@@ -44,7 +44,7 @@ def mostrar_menu():  # Función para mostrar el menú
             nombre = input("Nombre del empleado: ")
             edad = int(input("Edad del empleado: "))
             departamento = input("departamento del empleado: ")
-            crear_empleados(
+            crear_empleado(
                 nombre, edad, departamento
             )  # llamamos a la funcion crear_empleados que se encuentra en el archivo empleados_controller.py
 
@@ -81,14 +81,14 @@ def mostrar_menu():  # Función para mostrar el menú
                 print("No hay departamentos registrados.")
         elif (
             opcion == "5"
-        ):  # Si la opcion es 5, se pide el nombre del empleados a actualizar y se llama a la funcion buscar_empleados_por_nombre
+        ):  # Si la opcion es 5, se pide el nombre del empleados a actualizar y se llama a la funcion buscar_empleado_por_nombre
             nombre = input("Nombre del empleados a actualizar: ")
-            empleados = buscar_empleados_por_nombre(nombre)
-            if empleados:  # Si el empleados existe, se pide el nuevo nombre, la nueva edad y la nueva departamento del empleados y se llama a la funcion actualizar_empleados
+            empleados = buscar_empleado_por_nombre(nombre)
+            if empleados:  # Si el empleados existe, se pide el nuevo nombre, la nueva edad y la nueva departamento del empleados y se llama a la funcion actualizar_empleado
                 nuevo_nombre = input("Nuevo nombre del empleados: ")
                 edad = int(input("Nueva edad del empleados: "))
                 departamento = input("Nuevo departamento de empleados: ")
-                actualizar_empleados(nombre, nuevo_nombre, edad, departamento)
+                actualizar_empleado(nombre, nuevo_nombre, edad, departamento)
                 print("empleados actualizado exitosamente.")
             else:
                 print("empleado no encontrado.")
@@ -104,7 +104,7 @@ def mostrar_menu():  # Función para mostrar el menú
                 print("departamento no encontrado.")
         elif opcion == "7":
             nombre = input("Nombre del empleados a eliminar: ")
-            eliminar_empleados(nombre)
+            eliminar_empleado(nombre)
             print("empleados eliminado exitosamente.")
         elif opcion == "8":
             nombre = input("Nombre del departamento a eliminar: ")

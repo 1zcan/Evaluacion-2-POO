@@ -1,6 +1,6 @@
 import mysql.connector
 from models.db import conectar
-from models.empleados import Empleado
+from models.empleados import empleados
 
 def crear_empleado(nombre, direccion, telefono, email, fecha_contrato, salario):
     #Función para crear un empleado.
@@ -30,7 +30,7 @@ def obtener_empleados():
     try:
         cursor.execute("SELECT * FROM empleados")
         empleados = cursor.fetchall()
-        return [Empleado(*empleado) for empleado in empleados]
+        return [empleados(*empleado) for empleado in empleados]
     except mysql.connector.Error as err:
         print(f"Error: {err}")
         return []
@@ -48,7 +48,7 @@ def buscar_empleado_por_nombre(nombre):
         cursor.execute("SELECT * FROM empleados WHERE nombre = %s", (nombre,))
         empleado = cursor.fetchone()
         if empleado:
-            return Empleado(*empleado)
+            return empleados(*empleado)
         return None
     except mysql.connector.Error as err:
         print(f"Error: {err}")
