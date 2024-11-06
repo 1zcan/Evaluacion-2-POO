@@ -2,4 +2,9 @@
 
 Integrantes:
                 Orlando Aravena Venegas
+
+                Marco Badillo Garcia   
+
+                           
+
                 
