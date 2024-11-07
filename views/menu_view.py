@@ -104,7 +104,7 @@ def mostrar_menu():  # Función para mostrar el menú
             else:
                 print("departamento no encontrado.")
         elif opcion == "7":
-            nombre = input("Nombre del empleados a eliminar: ")
+            nombre = input("ID del empleados a eliminar: ")
             eliminar_empleado(nombre)
             print("empleados eliminado exitosamente.")
         elif opcion == "8":

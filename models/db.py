@@ -6,7 +6,7 @@ def conectar():
         print("Intentando conectar a la base de datos...")
         conn = mysql.connector.connect(
             host='localhost',
-            database='devaluacion2',
+            database='ev2',
             user='root',
             password=''
         )
