@@ -58,7 +58,7 @@ def buscar_empleado_por_nombre(nombre):
         cursor.close()
         conn.close()
 
-def actualizar_empleado(id, nombre, direccion, telefono, email, fecha_contrato, salario):
+def actualizar_empleado(nombre, direccion, telefono, email, fecha_contrato, salario):
     #Función para actualizar un empleado.
     conn = conectar()
     if conn is None:
