@@ -52,7 +52,7 @@ def mostrar_menu():  # Función para mostrar el menú
         elif opcion == "2":  # Si la opcion es 2, se pide el nombre y el gerente del departamento y se llama a la funcion crear_departamento
             nombre = input("Nombre del departamento: ")
 
-            gerente = input("gerente del departamento: ")
+            gerente = input("id del gerente del departamento: ")
             crear_departamento(nombre, gerente)
 
         elif opcion == "3":
@@ -66,12 +66,10 @@ def mostrar_menu():  # Función para mostrar el menú
                 print("No hay Empleados registrados.")
 
         elif opcion == "4":
-            departamentos = obtener_departamentos()  # llamamos a la funcion obtener_departamentos que se encuentra en el archivo departamento_controller.py
-            if departamentos:  # Si hay departamentos registrados, se recorre la lista de departamentos y se imprime el nombre, la edad y la gerente de cada uno
-                for (
-                    departamento
-                ) in departamentos:  # Recorremos la lista de departamentos,
-                    print(f"departamento:{departamento[0]},gerente:{departamento[1]}")
+            departamentos = obtener_departamentos()  # Llamamos a la función obtener_departamentos que se encuentra en el archivo departamento_controller.py
+            if departamentos:  # Si hay departamentos registrados, se recorre la lista de departamentos y se imprime el nombre y el gerente de cada uno
+                for departamento in departamentos:  # Recorremos la lista de departamentos
+                    print(f"departamento: {departamento['nombre']}, gerente ID: {departamento['gerente_id']}")
             else:
                 print("No hay departamentos registrados.")
 

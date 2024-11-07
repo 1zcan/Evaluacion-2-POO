@@ -1,3 +1,5 @@
+from models import registro_tiempo
+
 class RegistroTiempoController:
     def __init__(self):
         self.registros = []
