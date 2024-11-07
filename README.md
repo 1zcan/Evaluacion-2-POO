@@ -1,8 +1,8 @@
 # Evaluacion-2-POO
 
 Integrantes:
-                Orlando Aravena Venegas
-                Marco Badillo Garcia   
+                Orlando Aravena Venegas,
+                Marco Badillo Garcia,   
 
                            
 
