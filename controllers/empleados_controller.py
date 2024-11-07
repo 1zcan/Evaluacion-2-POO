@@ -22,7 +22,7 @@ def crear_empleado(nombre, direccion, telefono, email, fecha_contrato, salario):
         conn.close()
 
 def obtener_empleados():
-    #Función para obtener todos los empleados.
+    # Función para obtener todos los empleados.
     conn = conectar()
     if conn is None:
         return []
@@ -30,13 +30,14 @@ def obtener_empleados():
     try:
         cursor.execute("SELECT * FROM empleados")
         empleados = cursor.fetchall()
-        return [empleados(*empleado) for empleado in empleados]
+        return [empleado for empleado in empleados]
     except mysql.connector.Error as err:
         print(f"Error: {err}")
         return []
     finally:
         cursor.close()
         conn.close()
+
 
 def buscar_empleado_por_nombre(nombre):
     #Función para buscar un empleado por nombre.
