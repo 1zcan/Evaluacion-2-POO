@@ -58,7 +58,7 @@ def buscar_empleado_por_id(id):
         cursor.close()
         conn.close()
 
-def actualizar_empleado(id, nuevo_nombre):
+def actualizar_empleado(id, nuevo_nombre, direccion, telefono, email, fecha_contrato, salario):
     #Función para actualizar un empleado.
     conn = conectar()
     if conn is None:
@@ -66,8 +66,8 @@ def actualizar_empleado(id, nuevo_nombre):
     cursor = conn.cursor()
     try:
         cursor.execute(
-            "UPDATE empleados SET nombre = %s WHERE id = %s",
-            (nuevo_nombre, id)
+            "UPDATE empleados SET nombre = %s, direccion = %s, telefono = %s, email = %s, fecha_contrato = %s, salario = %s WHERE id = %s",
+            (nuevo_nombre, direccion, telefono, email, fecha_contrato, salario, id)
         )
         conn.commit()
     except mysql.connector.Error as err:

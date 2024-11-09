@@ -78,8 +78,15 @@ def mostrar_menu():  # Función para mostrar el menú
             id = input("id del empleado a actualizar: ")
             empleado = buscar_empleado_por_id(id)
             if empleado:  # Si el empleado existe..
+                
                 nuevo_nombre = input("Nuevo nombre del empleado: ")
-                actualizar_empleado(id, nuevo_nombre)
+                direccion = input("Nueva dirección del empleado: ")
+                telefono = input("Nuevo teléfono del empleado: ")
+                email = input("Nuevo Email del empleado: ")
+                fecha_contrato = input("Nueva fecha de contrato del empleado (YYYY-MM-DD): ")
+                salario = float(input("Nuevo salario del empleado: "))
+                actualizar_empleado(id,nuevo_nombre, direccion, telefono, email, fecha_contrato, salario)
+
                 print("Empleado actualizado exitosamente.")
             else:
                 print("Empleado no encontrado.")
