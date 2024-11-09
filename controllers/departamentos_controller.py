@@ -53,16 +53,16 @@ def obtener_departamentos():
 
 
 
-def buscar_departamento_por_nombre(nombre):
-    # Función para buscar un departamento por nombre
+def buscar_departamento_por_id(id):
+    # Función para buscar un departamento por id
     conn = conectar()
     if conn is None:
         return None
     cursor = conn.cursor()
     try:
         cursor.execute(
-            "SELECT d.id, d.nombre, d.gerente_id, e.nombre FROM departamentos d JOIN empleados e ON d.gerente_id = e.id WHERE d.nombre = %s",
-            (nombre),
+            "SELECT d.id, d.nombre, d.gerente_id, e.nombre FROM departamentos d JOIN empleados e ON d.gerente_id = e.id WHERE d.id = %s",
+            (id,)
         )
         departamento = cursor.fetchone()
         if departamento:
@@ -70,8 +70,7 @@ def buscar_departamento_por_nombre(nombre):
             return departamentos(
                 id,
                 nombre,
-                gerente_id,
-                empleados(gerente_id, gerente_nombre, None, None, None, None, None),
+                gerente_id
             )
         return None
     except mysql.connector.Error as err:
@@ -80,6 +79,7 @@ def buscar_departamento_por_nombre(nombre):
     finally:
         cursor.close()
         conn.close()
+
 
 
 def actualizar_departamento(id, nombre, gerente_id):
@@ -91,9 +91,10 @@ def actualizar_departamento(id, nombre, gerente_id):
     try:
         cursor.execute(
             "UPDATE departamentos SET nombre = %s, gerente_id = %s WHERE id = %s",
-            (nombre, gerente_id, id),
+            (nombre, gerente_id, id)
         )
         conn.commit()
+        print("Departamento actualizado exitosamente.")
     except mysql.connector.Error as err:
         print(f"Error: {err}")
         conn.rollback()

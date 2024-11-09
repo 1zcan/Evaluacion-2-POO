@@ -11,7 +11,7 @@ from controllers.departamentos_controller import (
     obtener_departamentos,
     actualizar_departamento,
     eliminar_departamento,
-    buscar_departamento_por_nombre,
+    buscar_departamento_por_id,
 )  # Importar funciones del controlador de departamento
 
 from models.db import (
@@ -51,7 +51,6 @@ def mostrar_menu():  # Función para mostrar el menú
 
         elif opcion == "2":  # Si la opcion es 2, se pide el nombre y el gerente del departamento y se llama a la funcion crear_departamento
             nombre = input("Nombre del departamento: ")
-
             gerente = input("id del gerente del departamento: ")
             crear_departamento(nombre, gerente)
 
@@ -78,7 +77,7 @@ def mostrar_menu():  # Función para mostrar el menú
             id = input("id del empleado a actualizar: ")
             empleado = buscar_empleado_por_id(id)
             if empleado:  # Si el empleado existe..
-                
+
                 nuevo_nombre = input("Nuevo nombre del empleado: ")
                 direccion = input("Nueva dirección del empleado: ")
                 telefono = input("Nuevo teléfono del empleado: ")
@@ -93,15 +92,16 @@ def mostrar_menu():  # Función para mostrar el menú
 
 
         elif opcion == "6":
-            id = input("Nombre del departamento a actualizar: ")
-            departamento = buscar_departamento_por_nombre(id)
+            id = input("ID del departamento a actualizar: ")
+            departamento = buscar_departamento_por_id(id)
             if departamento:
                 nuevo_nombre = input("Nuevo nombre del departamento: ")
-                gerente = input("Nuevo id del gerente del departamento: ")
-                actualizar_departamento(nombre, nuevo_nombre, gerente)
-                print("departamento actualizado exitosamente.")
+                gerente = input("Nuevo ID del gerente del departamento: ")
+                actualizar_departamento(id, nuevo_nombre, gerente)
+                print("Departamento actualizado exitosamente.")
             else:
-                print("departamento no encontrado.")
+                print("Departamento no encontrado.")
+
 
         elif opcion == "7":
             nombre = input("ID del empleados a eliminar: ")
