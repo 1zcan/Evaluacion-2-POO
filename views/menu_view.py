@@ -3,7 +3,7 @@ from controllers.empleados_controller import (
     obtener_empleados,
     actualizar_empleado,
     eliminar_empleado,
-    buscar_empleado_por_nombre,
+    buscar_empleado_por_id,
 )  # importar funciones del controlador de Empleados
 
 from controllers.departamentos_controller import (
@@ -75,24 +75,19 @@ def mostrar_menu():  # Función para mostrar el menú
 
         elif opcion == "5":
           # Si la opcion es 5, se pide el nombre del empleados a actualizar y se llama a la funcion buscar_empleado_por_nombre
-            nombre = input("Nombre del empleado a actualizar: ")
-            empleado = buscar_empleado_por_nombre(nombre)
+            id = input("id del empleado a actualizar: ")
+            empleado = buscar_empleado_por_id(id)
             if empleado:  # Si el empleado existe..
                 nuevo_nombre = input("Nuevo nombre del empleado: ")
-                direccion = input("Nueva dirección del empleado: ")
-                telefono = input("Nuevo teléfono del empleado: ")
-                email = input("Nuevo Email del empleado: ")
-                fecha_contrato = input("Nueva fecha de contrato del empleado (YYYY-MM-DD): ")
-                salario = float(input("Nuevo salario del empleado: "))
-                actualizar_empleado(nuevo_nombre, direccion, telefono, email, fecha_contrato, salario)
+                actualizar_empleado(id, nuevo_nombre)
                 print("Empleado actualizado exitosamente.")
             else:
                 print("Empleado no encontrado.")
 
 
         elif opcion == "6":
-            nombre = input("Nombre del departamento a actualizar: ")
-            departamento = buscar_departamento_por_nombre(nombre)
+            id = input("Nombre del departamento a actualizar: ")
+            departamento = buscar_departamento_por_nombre(id)
             if departamento:
                 nuevo_nombre = input("Nuevo nombre del departamento: ")
                 gerente = input("Nuevo id del gerente del departamento: ")
