@@ -84,7 +84,7 @@ def eliminar_empleado(id):
         return
     cursor = conn.cursor()
     try:
-        cursor.execute("DELETE FROM empleados WHERE id = %s", (id,))
+        cursor.execute("DELETE FROM empleados WHERE id = %s", (id))
         conn.commit()
     except mysql.connector.Error as err:
         print(f"Error: {err}")

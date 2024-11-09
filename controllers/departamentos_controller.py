@@ -1,6 +1,5 @@
 import mysql.connector
 from models.db import conectar
-from models.empleados import empleados
 from models.departamentos import departamentos
 
 
@@ -94,7 +93,6 @@ def actualizar_departamento(id, nombre, gerente_id):
             (nombre, gerente_id, id)
         )
         conn.commit()
-        print("Departamento actualizado exitosamente.")
     except mysql.connector.Error as err:
         print(f"Error: {err}")
         conn.rollback()
@@ -112,6 +110,7 @@ def eliminar_departamento(id):
     try:
         cursor.execute("DELETE FROM departamentos WHERE id = %s", (id,))
         conn.commit()
+        print("Departamento eliminado exitosamente.")
     except mysql.connector.Error as err:
         print(f"Error: {err}")
         conn.rollback()

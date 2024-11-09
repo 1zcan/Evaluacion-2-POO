@@ -104,13 +104,13 @@ def mostrar_menu():  # Función para mostrar el menú
 
 
         elif opcion == "7":
-            nombre = input("ID del empleados a eliminar: ")
-            eliminar_empleado(nombre)
-            print("empleados eliminado exitosamente.")
+            id = input("id del empleado a eliminar: ")
+            eliminar_empleado(id)
+            print("empleado eliminado exitosamente.")
 
         elif opcion == "8":
-            nombre = input("Nombre del departamento a eliminar: ")
-            eliminar_departamento(nombre)
+            id = input("id del departamento a eliminar: ")
+            eliminar_departamento(id)
             print("departamento eliminado exitosamente.")
 
         elif opcion == "9":
