@@ -1,10 +1,10 @@
 import mysql.connector
-from models.db import conectar
+from models.db import DB
 from models.empleados import empleados
 
 def crear_empleado(nombre, direccion, telefono, email, fecha_contrato, salario):
     #Función para crear un empleado.
-    conn = conectar()
+    conn = DB.get_connection()
     if conn is None:
         return
     cursor = conn.cursor()
@@ -23,7 +23,7 @@ def crear_empleado(nombre, direccion, telefono, email, fecha_contrato, salario):
 
 def obtener_empleados():
     # Función para obtener todos los empleados.
-    conn = conectar()
+    conn = DB.get_connection()
     if conn is None:
         return []
     cursor = conn.cursor()
@@ -41,7 +41,7 @@ def obtener_empleados():
 
 def buscar_empleado_por_id(id):
     #Función para buscar un empleado por nombre.
-    conn = conectar()
+    conn = DB.get_connection()
     if conn is None:
         return None
     cursor = conn.cursor()
@@ -60,7 +60,7 @@ def buscar_empleado_por_id(id):
 
 def actualizar_empleado(id, nuevo_nombre, direccion, telefono, email, fecha_contrato, salario):
     #Función para actualizar un empleado.
-    conn = conectar()
+    conn = DB.get_connection()
     if conn is None:
         return
     cursor = conn.cursor()
@@ -79,7 +79,7 @@ def actualizar_empleado(id, nuevo_nombre, direccion, telefono, email, fecha_cont
 
 def eliminar_empleado(id):
     #Función para eliminar un empleado.
-    conn = conectar()
+    conn = DB.get_connection()
     if conn is None:
         return
     cursor = conn.cursor()

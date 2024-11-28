@@ -1,5 +1,5 @@
 from models.usuario import Usuario
-from controllers.usuario_controller import agregar_usuario
+from controllers.usuario_controller import agregar
 
 def leer_numero(mensaje):
     while True:
@@ -22,15 +22,14 @@ def menu():
 
 def add_user():
     nombre=input("Ingrese nombre: ")
-    edad=leer_numero("Ingrese edad: ")
     passwd=input("Ingrese contraseña: ")
-    usuario=Usuario(nombre,edad,passwd)
-    agregar_usuario(usuario)
+    usuario=Usuario(nombre,passwd)
+    agregar(usuario)
 
 def main():
     while True:
         op=menu()
-        if op==1:#agregar
+        if op==1:
             add_user()
         elif op==0:
             print("Gracias por preferirnos")

@@ -1,11 +1,11 @@
 import mysql.connector
-from models.db import conectar
+from models.db import DB
 from models.departamentos import departamentos
 
 
 def crear_departamento(nombre, gerente_id):
     # Función para crear un departamento
-    conn = conectar()
+    conn = DB.get_connection()
     if conn is None:
         return
     cursor = conn.cursor()
@@ -25,7 +25,7 @@ def crear_departamento(nombre, gerente_id):
 
 def obtener_departamentos():
     # Función para obtener todos los departamentos
-    conn = conectar()
+    conn = DB.get_connection()
     if conn is None:
         return []
     cursor = conn.cursor()
@@ -54,7 +54,7 @@ def obtener_departamentos():
 
 def buscar_departamento_por_id(id):
     # Función para buscar un departamento por id
-    conn = conectar()
+    conn = DB.get_connection()
     if conn is None:
         return None
     cursor = conn.cursor()
@@ -83,7 +83,7 @@ def buscar_departamento_por_id(id):
 
 def actualizar_departamento(id, nombre, gerente_id):
     # Función para actualizar un departamento
-    conn = conectar()
+    conn = DB.get_connection()
     if conn is None:
         return
     cursor = conn.cursor()
@@ -103,7 +103,7 @@ def actualizar_departamento(id, nombre, gerente_id):
 
 def eliminar_departamento(id):
     # Función para eliminar un departamento
-    conn = conectar()
+    conn = DB.get_connection()
     if conn is None:
         return
     cursor = conn.cursor()

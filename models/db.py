@@ -1,23 +1,35 @@
 import mysql.connector
 from mysql.connector import Error
 
-def conectar():
-    try:
-        print("Intentando conectar a la base de datos...")
-        conn = mysql.connector.connect(
-            host='localhost',
-            database='ev3',
-            user='root',
-            password=''
-        )
-        print("Conexión exitosa!")
-        return conn
-    except Error as e:
-        print(f"Error al conectar a MariaDB: {e}")
-        return None
+class DB:
+
+    mydb = None
+
+    def __init__(self):
+        if not DB.mydb:
+            try:
+                print("Intentando conectar a la base de datos...")
+                DB.mydb = mysql.connector.connect(
+                    host='localhost',
+                    database='ev3',
+                    user='root',
+                    password='' )
+            
+            except Error as e:
+                print(f"Error al conectar a MariaDB: {e}")
+
+    @staticmethod
+    def get_connection():
+        return DB.mydb
+    
+    def close_connection(self):
+        if DB.mydb:
+            DB.mydb.close()
+            DB.mydb = None
+
 
 def crear_tablas():
-    conn = conectar()
+    conn = DB.get_connection()
     if conn is None:
         return
     try:
