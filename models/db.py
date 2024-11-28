@@ -6,7 +6,7 @@ def conectar():
         print("Intentando conectar a la base de datos...")
         conn = mysql.connector.connect(
             host='localhost',
-            database='ev2',
+            database='ev3',
             user='root',
             password=''
         )
@@ -92,7 +92,14 @@ def crear_tablas():
                 FOREIGN KEY (proyecto_id) REFERENCES proyectos(id) ON DELETE CASCADE
             )
         ''')
-
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS usuarios (
+           
+                username VARCHAR(50) NOT NULL,
+                contrasena VARCHAR(50) NOT NULL         
+            )
+        ''')
+        
         conn.commit()
         print("Tablas creadas exitosamente!")
     except Error as e:
