@@ -29,7 +29,9 @@ class DB:
 
 
 def crear_tablas():
-    conn = DB.get_connection()
+
+    conn = DB().get_connection()
+    
     if conn is None:
         return
     try:
@@ -111,14 +113,13 @@ def crear_tablas():
                 contrasena VARCHAR(50) NOT NULL         
             )
         ''')
-        
         conn.commit()
         print("Tablas creadas exitosamente!")
     except Error as e:
         print(f"Error al crear tablas: {e}")
     finally:
         cursor.close()
-        conn.close()
+        
 
 crear_tablas()
 

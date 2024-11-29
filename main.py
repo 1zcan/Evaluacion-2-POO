@@ -1,8 +1,10 @@
 from views.login import MenuLogin
-from views.usuarios import MenuUsuario
+from views.usuarios import menu as MenuUsuario
 from views.indicadores import mostrarMenuIndicador
+from models.db import DB
 
 def main():
+    DB()
     menu_login = MenuLogin()
     inicio = menu_login.iniciar_sesion()
     if inicio:

@@ -23,6 +23,3 @@ def agregar(self, nuevo_usuario: Usuario) -> bool:
     self.conexion.commit()
     cursor.close()
     return True
-
-def confirmar_contrasena(self, intento_contrasena: str) -> bool:
-    return bcrypt.checkpw(intento_contrasena.encode("UTF-8"), self.contrasena)

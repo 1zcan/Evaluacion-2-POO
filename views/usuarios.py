@@ -32,4 +32,4 @@ def main():
         if op==1:
             add_user()
         elif op==0:
-            print("Gracias por preferirnos")
+            print("SALIR")

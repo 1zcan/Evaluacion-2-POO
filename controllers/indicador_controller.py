@@ -2,7 +2,41 @@ import requests
 from datetime import datetime
 from models.indicadores import IndicadorEconomico
 
-def consultar_por_periodo(self, indicador: str, año: int, fecha_inicio: str, fecha_fin: str, idEmpleado: int) -> list:
+def consultar_por_fecha(indicador: str, fecha: str, idEmpleado: int) -> IndicadorEconomico:
+    try:
+        # Convertimos la fecha a un objeto datetime
+        fecha = datetime.strptime(fecha, "%d-%m-%Y")
+
+        # Consultamos el valor del indicador en la fecha especificada desde la API
+        url = f"https://www.mindicador.cl/api/{indicador}/{fecha.strftime('%d-%m-%Y')}"
+
+        response = requests.get(url)
+        response.raise_for_status()
+        data = response.json()
+
+        # Revisamos si hay datos disponibles para la fecha consultada
+        if not data.get('serie'):
+            print("No hay datos disponibles para la fecha especificada.")
+            return None
+
+        # Extraemos el valor del indicador de la respuesta
+        valor_indicador = data['serie'][0]['valor']
+
+        return IndicadorEconomico(
+            tipoIndicador=indicador,
+            valorIndicador=valor_indicador,
+            fechaIndicador=fecha.strftime("%d-%m-%Y"),
+            idEmpleado=idEmpleado,
+            sitioWeb="https://www.mindicador.cl"
+        )
+    except requests.exceptions.RequestException as error:
+        print(f"Error en la consulta de la API: {error}")
+        return None
+    except Exception as error:
+        print(f"Error al consultar la fecha: {error}")
+        return None
+
+def consultar_por_periodo( indicador: str, año: int, fecha_inicio: str, fecha_fin: str, idEmpleado: int) -> list:
         try:
             # Convertimos las fechas de inicio y fin a objetos datetime
             fecha_inicio = datetime.strptime(fecha_inicio, "%d-%m-%Y")
