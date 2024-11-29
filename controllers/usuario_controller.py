@@ -3,7 +3,7 @@ from models.db import DB
 import bcrypt
 
 def agregar(nuevo_usuario: Usuario) -> bool:
-    nuevo_usuario.contrasena = bcrypt.hashpw(nuevo_usuario.contrasena.encode("UTF-8"), bcrypt.gensalt(14))
+    # nuevo_usuario.contrasena = bcrypt.hashpw(nuevo_usuario.contrasena.encode("UTF-8"), bcrypt.gensalt(14))
 
     cursor = DB.get_connection().cursor()
     query = "INSERT INTO usuarios (username, contrasena) VALUES (%s, %s)"     

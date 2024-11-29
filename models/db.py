@@ -108,7 +108,8 @@ def crear_tablas():
         ''')
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS usuarios (
-           
+                       
+                id INT AUTO_INCREMENT PRIMARY KEY,
                 username VARCHAR(50) NOT NULL,
                 contrasena VARCHAR(50) NOT NULL         
             )
