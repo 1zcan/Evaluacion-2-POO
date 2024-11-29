@@ -198,18 +198,16 @@ INSERT INTO `rol` (`idRol`, `nombre`) VALUES
 --
 
 CREATE TABLE `usuario` (
-  `idUsuario` int(11) NOT NULL,
   `nombreUsuario` varchar(45) DEFAULT NULL,
-  `contraseña` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `Rol_idRol` int(11) DEFAULT NULL
+  `contrasena` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`idUsuario`, `nombreUsuario`, `contraseña`, `Rol_idRol`) VALUES
-(1, 'izcan', '123', 1),
+INSERT INTO `usuario` (`nombreUsuario`, `contrasena`) VALUES
+('izcan', '123', ),
 
 
 --
